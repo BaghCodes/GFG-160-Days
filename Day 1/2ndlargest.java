@@ -23,38 +23,20 @@ public class Main {
 
 // } Driver Code Ends
 
-
 class Solution {
     public int getSecondLargest(int[] arr) {
-        // code here
-        int s1,s2;
-        int n = arr.length;
-        int max = Integer.MIN_VALUE;
-        int second_max = Integer.MIN_VALUE;
-        int p1=0,p2=n-1;
-        while(p1<=p2){
-            int val1=arr[p1];
-            int val2=arr[p2];
-            if(val1>p2){
-                second_max = max;
-                max = val1;
+        int first = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+
+        for (int num : arr) {
+            if (num > first) {
+                second = first;
+                first = num;
+            } else if (num > second && num < first) {
+                second = num;
             }
-            else if(val1> second_max && val1 != max) {
-                second_max=val1;
-            }
-            
-            if(p1!=p2){
-                if(val1>max){
-                    second_max = max;
-                    max = val2;
-                }
-                else if(val2>second_max && val2!=max) {
-                    second_max=val2;
-                }
-            }
-            p1++;
-            p2--;
         }
-        return second_max;
+
+        return second == Integer.MIN_VALUE ? -1 : second;
     }
 }
